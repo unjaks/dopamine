@@ -63,16 +63,20 @@ export class DiscordApi {
         }
 
         const presence: Presence = {
-            details: `${args.title}`,
+            details: `Listening to ${args.title}`,  // Changed this line
             state: `${args.artists}`,
             largeImageKey: args.largeImageKey,
             largeImageText: args.largeImageText,
             smallImageKey: args.smallImageKey,
             smallImageText: args.smallImageText,
+            instance: false,
         };
 
         if (args.shouldSendTimestamps && args.startTime) {
             presence.startTimestamp = Math.floor(args.startTime / 1000);
+            if (args.endTime) {
+                presence.endTimestamp = Math.floor(args.endTime / 1000);
+            }
         }
 
         if (!this._client) {
